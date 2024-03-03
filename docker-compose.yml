@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  ecommerce.user.server:
+    image: ${DOCKER_REGISTRY-}ecommerce.user.server
+    build:
+      context: .
+      dockerfile: Ecommerce.User.API/Dockerfile

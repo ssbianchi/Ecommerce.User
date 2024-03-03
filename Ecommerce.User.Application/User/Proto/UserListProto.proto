@@ -1,0 +1,29 @@
+﻿// Declares the syntax version being used (Version 3)
+syntax = "proto3";
+ 
+// Specifies the namespace to be used for the generated C# types. 
+option csharp_namespace = "Ecommerce.User.Application.User.Dto";
+ 
+//  Google's "Well Known Types" extensions: DateTime
+//import "google/protobuf/timestamp.proto"; 
+//  Google's "Well Known Types" extensions: Nullable types
+//import "google/protobuf/wrappers.proto";
+ 
+// the main class:
+message UserListProto {
+    repeated UserProto list = 1;
+}
+ 
+message UserProto {
+    int32 id = 1;
+    string nome =2;
+    string login = 3;
+    string password = 4;
+    string email = 5;
+
+    //google.protobuf.Timestamp 
+    //google.protobuf.Int32Value 
+    //google.protobuf.DoubleValue 
+    // repeated 
+}
+ 

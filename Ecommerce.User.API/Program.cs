@@ -11,32 +11,8 @@ using Ecommerce.User.Application.User;
 
 var builder = WebApplication.CreateBuilder(args);
 var builderConfig = builder.Configuration;
-#if !DEBUG
- 
-Environment.SetEnvironmentVariable("AZURE_TENANT_ID", builderConfig["KeyVault:TenantId"]);
- 
-// Add Key Vaults from Azure to appsettings configuration
-builder.Host.ConfigureAppConfiguration((context, config) =>
-{
-    var credential = new ChainedTokenCredential(/*new EnvironmentCredential(),*/ new ManagedIdentityCredential(), new AzureCliCredential());
-    var secretClient = new SecretClient(new Uri(builderConfig["KeyVault:Url"]), credential);
-    config.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
-});
- 
-#else
-// Add Key Vaults from Azure to appsettings configuration
-builder.Host.ConfigureAppConfiguration((context, config) =>
-{
-    var url = builderConfig["KeyVault:Url"];
-    var tenantId = builderConfig["KeyVault:TenantId"];
-    var clientId = builderConfig["KeyVault:ClientId"];
-    var clientSecret = builderConfig["KeyVault:ClientSecret"];
-    var credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-    //var client = new SecretClient(new Uri(url), credential);
-    //config.AddAzureKeyVault(client, new AzureKeyVaultConfigurationOptions());
-});
-#endif
 
+// Add Key Vaults from Azure to appsettings configuration
 // Add an ActionFilter which takes care of a standarised Exception message.
 builder.Services.AddControllers(c => c.Filters.Add<HttpExceptionFilter>())
                 .ConfigureApiBehaviorOptions(s => s.SuppressModelStateInvalidFilter = true);

@@ -17,6 +17,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{D83CE69A-2D1E-4AA1-9ED8-B09F105378B6}"
 	ProjectSection(SolutionItems) = preProject
+		sqlServer.yml = sqlServer.yml
+		sqlServerDeploy.yml = sqlServerDeploy.yml
+		storage.yml = storage.yml
+		storageClaim.yml = storageClaim.yml
 		userservice.yaml = userservice.yaml
 		userservicedeploy.yaml = userservicedeploy.yaml
 	EndProjectSection

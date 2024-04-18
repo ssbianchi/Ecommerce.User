@@ -15,6 +15,7 @@ namespace Ecommerce.User.Repository
             services.AddDbContext<EcommerceContext>(c =>
             {
                 connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Ecommerce_User;Trusted_Connection=True;";
+                //connectionString = "Server=10.97.215.125,31433;Database=Ecommerce_User;Integrated Security=false;User ID=SA;Password=Sql2019isfast;Connection Timeout=30;TrustServerCertificate=True";
                 c.UseSqlServer(connectionString);
             });
 

@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Ecommerce.User.Repository;
 using Ecommerce.User.Application;
 using Ecommerce.User.CrossCutting;
+using Ecommerce.User.Application.User;
 
 var builder = WebApplication.CreateBuilder(args);
 var builderConfig = builder.Configuration;
@@ -61,8 +62,21 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.RegisterRepository(builderConfig["EcommerceUserDatabase"]);
 builder.Services.RegisterApplication();
 builder.Services.RegisterCrossCutting(builderConfig);
+//builder.Services.AddSingleton<StartupHealthCheck>();
 
+//builder.Services.AddHealthChecks()
+//                .AddCheck<LivenessHealthCheck>("Liveness")
+//                .AddCheck<StartupHealthCheck>("Readiness");
 var app = builder.Build();
+
+app.MapHealthChecks("/healthz", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+{
+    Predicate = healthCheck => healthCheck.Name == "Liveness"
+});
+app.MapHealthChecks("/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+{
+    Predicate = healthCheck => healthCheck.Name == "Readiness"
+});
 
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())

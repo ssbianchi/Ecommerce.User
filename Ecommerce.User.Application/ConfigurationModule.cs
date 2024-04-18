@@ -10,6 +10,7 @@ namespace Ecommerce.User.Application
             service.AddAutoMapper(typeof(ConfigurationModule).Assembly);
 
             service.AddScoped<IUserService, UserService>();
+            service.AddHostedService<StartupBackgroundService>();
         }
     }
 }

@@ -3,10 +3,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
  
-ARG BuildConfiguration
- 
 COPY . .
-RUN dotnet publish "Ecommerce.User.API/Ecommerce.User.API.csproj" -c $BuildConfiguration -o /app/publish
+RUN dotnet publish "Ecommerce.User.API/Ecommerce.User.API.csproj" -c Release -o /app/publish
  
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 EXPOSE 80
